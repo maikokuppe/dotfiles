@@ -1,0 +1,14 @@
+source $HOME/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle extract
+antigen bundle git
+antigen bundle heroku
+antigen bundle kubectl
+antigen bundle rails
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply

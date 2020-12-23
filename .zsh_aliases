@@ -1,0 +1,5 @@
+alias pw='pwgen -n 8 -s | cut -f1 | xclip -selection c'
+alias pwlong='pwgen -n 32 -s | cut -f1 | xclip -selection c'
+alias szsh='source ~/.zshrc > /dev/null 2>&1; zsh'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias ll='ls -alF'
