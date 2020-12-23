@@ -1,0 +1,191 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+
+set $x 24
+set $v 25
+set $l 26
+set $c 27
+set $w 28
+set $k 29
+set $h 30
+set $g 31
+set $f 32
+set $q 33
+# set $ß 34
+set $u 38
+set $i 39
+set $a 40
+set $e 41
+set $o 42
+set $s 43
+set $n 44
+set $r 45
+set $t 46
+set $d 47
+set $y 48
+set $ü 52
+set $ö 53
+set $ä 54
+set $p 55
+set $z 56
+set $b 57
+set $m 58
+
+set $left 113
+set $right 114
+set $up 111
+set $down 116
+
+# Autostart
+exec xset r rate 300 30
+exec xset s off
+exec xset +dpms
+exec xset dpms 0 0 0
+
+# use Mouse+mod1 to drag floating windows to their wanted position
+floating_modifier mod1
+
+workspace_layout tabbed
+
+# exec work
+# workspace 1 output eDP-1
+workspace 1 output DP-1
+workspace 2 output HDMI-1
+# start a terminal
+bindcode mod1+$t exec i3-sensible-terminal
+
+# start programs
+bindcode mod1+$b exec google-chrome-stable
+bindcode mod1+$n exec "nemo --no-desktop"
+bindcode mod1+mod3+$x exec "subl ~/.i3/config"
+bindcode mod1+$s exec "subl"
+bindcode mod1+mod3+$f exec flameshot gui
+bindcode mod1+mod3+$d exec deepin-screenshot
+
+# kill focused window
+bindcode mod1+$c kill
+
+# start dmenu (a program launcher)
+bindcode mod1+$p exec dmenu_run
+
+# Lock screen
+bindcode mod1+mod3+$g exec import -window root ~/Pictures/0_screenshot.png && convert ~/Pictures/0_screenshot.png -blur 0x10 ~/Pictures/0_screenshot.png && i3lock --tiling --image ~/Pictures/0_screenshot.png
+
+# change focus
+bindcode mod1+$i focus left
+bindcode mod1+$a focus down
+bindcode mod1+$l focus up
+bindcode mod1+$e focus right
+
+# move focused window
+bindcode mod1+mod3+$i move left
+bindcode mod1+mod3+$a move down
+bindcode mod1+mod3+$l move up
+bindcode mod1+mod3+$e move right
+
+# alternatively, you can use the cursor keys:
+bindcode mod1+mod3+$left move left
+bindcode mod1+mod3+$down move down
+bindcode mod1+mod3+$up move up
+bindcode mod1+mod3+$right move right
+
+# split in horizontal orientation
+bindcode mod1+$h split h
+
+# split in vertical orientation
+bindcode mod1+$v split v
+
+# enter fullscreen mode for the focused container
+bindcode mod1+$f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindcode mod1+$s layout stacking
+bindcode mod1+$w layout tabbed
+# bindsym mod1+e layout toggle split
+
+# toggle tiling / floating
+bindsym mod1+mod3+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym mod1+space focus mode_toggle
+
+# move the currently focused window to the scratchpad
+bindsym mod1+mod3+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym mod1+minus scratchpad show
+
+# switch to workspace
+bindcode mod1+$u workspace prev
+bindcode mod1+$o workspace next
+# bindsym mod1+1 workspace 1
+# bindsym mod1+2 workspace 2
+# bindsym mod1+3 workspace 3
+# bindsym mod1+4 workspace 4
+# bindsym mod1+5 workspace 5
+# bindsym mod1+6 workspace 6
+# bindsym mod1+7 workspace 7
+# bindsym mod1+8 workspace 8
+# bindsym mod1+9 workspace 9
+# bindsym mod1+0 workspace 10
+
+# move focused container to workspace
+bindcode mod1+mod3+$u move window to workspace prev; workspace prev
+bindcode mod1+mod3+$o move window to workspace next; workspace next
+# bindsym mod1+mod3+1 move container to workspace 1
+# bindsym mod1+mod3+2 move container to workspace 2
+# bindsym mod1+mod3+3 move container to workspace 3
+# bindsym mod1+mod3+4 move container to workspace 4
+# bindsym mod1+mod3+5 move container to workspace 5
+# bindsym mod1+mod3+6 move container to workspace 6
+# bindsym mod1+mod3+7 move container to workspace 7
+# bindsym mod1+mod3+8 move container to workspace 8
+# bindsym mod1+mod3+9 move container to workspace 9
+# bindsym mod1+mod3+0 move container to workspace 10
+
+# reload the configuration file
+bindcode mod1+mod3+$r exec i3-msg reload
+
+# Volume control
+# bindsym mod1++ exec pactl set-sink-volume 0 +5%
+# bindsym mod1+- exec pactl set-sink-volume 0 -5%
+
+# Misc
+bindcode mod1+mod3+$q exec setxkbmap -layout us
+bindcode mod1+$q exec setxkbmap -layout de neo
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+        tray_output primary
+}
+
+for_window [title="Karma - Google Chrome"] move container to workspace 2
