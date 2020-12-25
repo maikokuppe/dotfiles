@@ -1,31 +1,18 @@
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
+font pango:monospace 10
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
+gaps inner 10
+gaps outer 0
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+new_window normal
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+for_window [class=".*"] border pixel 3
+default_border pixel
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
+exec --no-startup-id dbus-launch compton --config ~/.config/compton/config &
+exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
+
+set $01 20
+set $02 21
 
 set $x 24
 set $v 25
@@ -37,7 +24,8 @@ set $h 30
 set $g 31
 set $f 32
 set $q 33
-# set $ß 34
+set $q1 34
+set $q2 35
 set $u 38
 set $i 39
 set $a 40
@@ -56,6 +44,22 @@ set $p 55
 set $z 56
 set $b 57
 set $m 58
+set $comma 59
+set $dot 60
+set $j 61
+
+set $n1 10
+set $n2 11
+set $n3 12
+set $n4 13
+set $n5 14
+set $n6 15
+set $n7 16
+set $n8 17
+set $n9 18
+set $n0 19
+
+set $hat 49
 
 set $left 113
 set $right 114
@@ -63,129 +67,115 @@ set $up 111
 set $down 116
 
 # Autostart
-exec xset r rate 300 30
-exec xset s off
-exec xset +dpms
-exec xset dpms 0 0 0
+exec_always --no-startup-id xset r rate 250 40
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset +dpms
+exec_always --no-startup-id xset dpms 0 0 0
 
-# use Mouse+mod1 to drag floating windows to their wanted position
-floating_modifier mod1
-
-workspace_layout tabbed
+workspace_layout default
 
 # exec work
 # workspace 1 output eDP-1
 workspace 1 output DP-1
 workspace 2 output HDMI-1
-# start a terminal
-bindcode mod1+$t exec i3-sensible-terminal
+
+# workspace names
+set $ws0 "0:⁰"
+set $ws1 "1:¹"
+set $ws2 "2:²"
+set $ws3 "3:³"
+set $ws4 "4:¹"
+set $ws5 "5:²"
+set $ws6 "6:¹"
+set $ws7 "7:²"
+set $ws8 "8:¹"
+set $ws9 "9:²"
+set $ws10 "10:³"
+
+# align workspaces
+workspace 0 output eDP-1
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output HDMI-1
+workspace 5 output HDMI-1
+workspace 6 output HDMI-1
+workspace 7 output HDMI-1
+workspace 8 output DP-1
+workspace 9 output DP-1
+workspace 10 output DP-1
+
+# switch to workspace
+bindcode mod1+mod3+$hat workspace number $ws0
+bindcode mod1+mod3+$n1 workspace number $ws1
+bindcode mod1+mod3+$n2 workspace number $ws2
+bindcode mod1+mod3+$n3 workspace number $ws3
+bindcode mod1+mod3+$n4 workspace number $ws4
+bindcode mod1+mod3+$n5 workspace number $ws5
+bindcode mod1+mod3+$n6 workspace number $ws6
+bindcode mod1+mod3+$c workspace number $ws6
+bindcode mod1+mod3+$n7 workspace number $ws7
+bindcode mod1+mod3+$n8 workspace number $ws8
+bindcode mod1+mod3+$n9 workspace number $ws9
+bindcode mod1+mod3+$n0 workspace number $ws10
+bindcode mod1+mod3+$m workspace number $ws8
+bindcode mod1+mod3+$comma workspace number $ws9
+bindcode mod1+mod3+$dot workspace number $ws10
 
 # start programs
-bindcode mod1+$b exec google-chrome-stable
-bindcode mod1+$n exec "nemo --no-desktop"
-bindcode mod1+mod3+$x exec "subl ~/.i3/config"
-bindcode mod1+$s exec "subl"
-bindcode mod1+mod3+$f exec flameshot gui
-bindcode mod1+mod3+$d exec deepin-screenshot
-
-# kill focused window
+bindcode mod1+$t exec --no-startup-id gnome-terminal
+bindcode mod1+$d exec --no-startup-id gnome-terminal --working-directory="$(cat /tmp/whereami)"
+bindcode mod1+$m exec --no-startup-id google-chrome-stable --profile-directory='Default'
+bindcode mod1+$comma exec --no-startup-id google-chrome-stable --profile-directory='Profile 1'
+bindcode mod1+$dot exec --no-startup-id google-chrome-stable --profile-directory='Profile 2'
+bindcode mod1+$j exec --no-startup-id google-chrome-stable --profile-directory='Profile 3'
+bindcode mod1+$n exec --no-startup-id gnome-terminal -e "zsh -c nnn"
+bindcode mod1+mod3+$x exec --no-startup-id "subl ~/.i3/config"
+bindcode mod1+$s exec --no-startup-id "subl"
+bindcode mod1+mod3+$f exec --no-startup-id flameshot gui
+bindcode mod1+mod3+$d exec --no-startup-id deepin-screenshot
 bindcode mod1+$c kill
-
-# start dmenu (a program launcher)
 bindcode mod1+$p exec dmenu_run
-
-# Lock screen
-bindcode mod1+mod3+$g exec import -window root ~/Pictures/0_screenshot.png && convert ~/Pictures/0_screenshot.png -blur 0x10 ~/Pictures/0_screenshot.png && i3lock --tiling --image ~/Pictures/0_screenshot.png
+bindcode mod1+mod3+$g exec i3lock --color 2b3134
+bindcode mod1+mod3+$r exec --no-startup-id i3-msg reload && i3-msg restart
+bindcode mod1+mod3+$w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
+bindcode mod1+mod3+$q exec setxkbmap -layout us
+bindcode mod1+$q exec setxkbmap -layout de neo
 
 # change focus
 bindcode mod1+$i focus left
 bindcode mod1+$a focus down
 bindcode mod1+$l focus up
 bindcode mod1+$e focus right
+bindcode mod1+$u workspace prev
+bindcode mod1+$o workspace next
 
 # move focused window
 bindcode mod1+mod3+$i move left
 bindcode mod1+mod3+$a move down
 bindcode mod1+mod3+$l move up
 bindcode mod1+mod3+$e move right
-
-# alternatively, you can use the cursor keys:
-bindcode mod1+mod3+$left move left
-bindcode mod1+mod3+$down move down
-bindcode mod1+mod3+$up move up
-bindcode mod1+mod3+$right move right
-
-# split in horizontal orientation
-bindcode mod1+$h split h
-
-# split in vertical orientation
-bindcode mod1+$v split v
-
-# enter fullscreen mode for the focused container
-bindcode mod1+$f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-# bindcode mod1+$s layout stacking
-bindcode mod1+$w layout tabbed
-# bindsym mod1+e layout toggle split
-
-# toggle tiling / floating
-bindsym mod1+mod3+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym mod1+space focus mode_toggle
-
-# move the currently focused window to the scratchpad
-bindsym mod1+mod3+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym mod1+minus scratchpad show
-
-# switch to workspace
-bindcode mod1+$u workspace prev
-bindcode mod1+$o workspace next
-# bindsym mod1+1 workspace 1
-# bindsym mod1+2 workspace 2
-# bindsym mod1+3 workspace 3
-# bindsym mod1+4 workspace 4
-# bindsym mod1+5 workspace 5
-# bindsym mod1+6 workspace 6
-# bindsym mod1+7 workspace 7
-# bindsym mod1+8 workspace 8
-# bindsym mod1+9 workspace 9
-# bindsym mod1+0 workspace 10
-
-# move focused container to workspace
 bindcode mod1+mod3+$u move window to workspace prev; workspace prev
 bindcode mod1+mod3+$o move window to workspace next; workspace next
-# bindsym mod1+mod3+1 move container to workspace 1
-# bindsym mod1+mod3+2 move container to workspace 2
-# bindsym mod1+mod3+3 move container to workspace 3
-# bindsym mod1+mod3+4 move container to workspace 4
-# bindsym mod1+mod3+5 move container to workspace 5
-# bindsym mod1+mod3+6 move container to workspace 6
-# bindsym mod1+mod3+7 move container to workspace 7
-# bindsym mod1+mod3+8 move container to workspace 8
-# bindsym mod1+mod3+9 move container to workspace 9
-# bindsym mod1+mod3+0 move container to workspace 10
 
-# reload the configuration file
-bindcode mod1+mod3+$r exec i3-msg reload
+# window appearance
+bindcode mod1+$h split h
+bindcode mod1+$v split v
+bindcode mod1+$f fullscreen toggle
+bindcode mod1+$01 resize shrink width 40 px
+bindcode mod1+$02 resize grow width 40 px
+bindcode mod1+$q1 resize shrink height 40 px
+bindcode mod1+$q2 resize grow height 40 px
 
-# Volume control
-# bindsym mod1++ exec pactl set-sink-volume 0 +5%
-# bindsym mod1+- exec pactl set-sink-volume 0 -5%
-
-# Misc
-bindcode mod1+mod3+$q exec setxkbmap -layout us
-bindcode mod1+$q exec setxkbmap -layout de neo
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-        status_command i3status
-        tray_output primary
+  strip_workspace_numbers yes
+  status_command i3status
+  tray_output none
+  i3bar_command i3bar --transparency
+  position top
+  separator_symbol " | "
+  font pango:monospace, FontAwesome 12
+  colors {
+    background #000000c0
+  }
 }
-
-for_window [title="Karma - Google Chrome"] move container to workspace 2

@@ -1,0 +1,61 @@
+general {
+  colors = true
+  color_good = "#BBBBBB"
+  color_bad = "#ff5656"
+  color_degraded = "#55858E"
+  interval = 1
+}
+
+order += "load"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "disk /"
+order += "wireless wlp5s0"
+order += "ethernet eth0"
+order += "battery 0"
+order += "tztime local"
+
+load {
+  format = "Load %1min"
+}
+
+cpu_usage {
+  format = "CPU %usage"
+  max_threshold = 75
+}
+
+cpu_temperature 0 {
+  format = "Temp: %degrees°"
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
+  max_threshold = 80
+}
+
+disk "/" {
+  format = "Disk: %avail"
+}
+
+wireless wlp5s0 {
+  format_up = "W: (%quality at %essid) %ip"
+  format_down = "W: down"
+}
+
+ethernet eth0 {
+  format_up = "­E: %ip"
+  format_down = "E: down"
+}
+
+battery 0 {
+  format = "%status %percentage - %remaining"
+  format_down = "No battery"
+  status_chr = "CHR"
+  status_bat = "BAT"
+  status_unk = "UNK"
+  status_full = "FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
+  hide_seconds = true
+}
+
+tztime local {
+  format = "%d. %h %H:%M:%S  "
+}
