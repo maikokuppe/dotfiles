@@ -1,0 +1,69 @@
+#!/usr/bin/ruby
+
+require 'optparse'
+require 'json'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: smart-open -c [command] -w [workspace_1 workspace_2 ...]"
+
+  opts.on("-c", "--command=COMMAND", "The command to be executed") do |c|
+    options[:command] = c
+  end
+
+  opts.on(
+    "-w", "--workspaces=WORKSPACES", 'The workspaces to loop through. First without windows will be used.',
+  ) do |w|
+    options[:workspaces] = w.split(',')
+  end
+end.parse!
+
+abort('Command must be given') if options[:command].nil?
+abort('Workspaces must be given') if options[:workspaces].nil?
+
+class Node
+  def initialize(tree)
+    @tree = tree
+  end
+
+  def name
+    @tree['name']
+  end
+
+  def type
+    @tree['type']
+  end
+
+  def workspace?
+    type == 'workspace'
+  end
+
+  def deep_nodes
+    deep_nodes = []
+
+    deep_nodes << nodes.map do |node|
+      [node] + node.deep_nodes
+    end
+
+    deep_nodes.flatten
+  end
+
+  protected
+
+  def nodes
+    @nodes ||= @tree['nodes'].map do |subtree|
+      self.class.new(subtree)
+    end
+  end
+end
+
+tree = JSON.parse(`i3-msg -t get_tree`)
+root_node = Node.new(tree)
+open_workspaces = root_node.deep_nodes.select(&:workspace?)
+
+free_workspace_names = options[:workspaces] - open_workspaces.map(&:name)
+workspace_name_to_use = free_workspace_names.first || options[:workspaces].last
+
+system "i3-msg workspace '#{workspace_name_to_use}'"
+system options[:command]

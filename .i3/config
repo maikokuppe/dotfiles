@@ -1,9 +1,10 @@
 font pango:monospace 10
 
-gaps inner 10
+gaps inner 15
 gaps outer 0
 
 new_window normal
+mouse_warping output
 
 for_window [class=".*"] border pixel 3
 default_border pixel
@@ -75,17 +76,17 @@ exec_always --no-startup-id xset dpms 0 0 0
 workspace_layout default
 
 # workspace names
-set $term0 "0:⁰"
-set $term1 "1:¹"
-set $term2 "2:²"
-set $term3 "3:³"
-set $term4 "4:¹"
-set $term5 "5:²"
-set $code1 "6:¹"
-set $code2 "7:²"
-set $chrome1 "8:¹"
-set $chrome2 "9:²"
-set $chrome3 "10:³"
+set $term0 0:⁰
+set $term1 1:¹
+set $term2 2:²
+set $term3 3:³
+set $misc1 4:¹
+set $misc2 5:²
+set $code1 6:¹
+set $code2 7:²
+set $chrome1 8:¹
+set $chrome2 9:²
+set $chrome3 10:³
 
 # align workspaces
 workspace 0 output eDP-1
@@ -105,8 +106,8 @@ bindcode mod1+mod3+$hat workspace number $term0
 bindcode mod1+mod3+$n1 workspace number $term1
 bindcode mod1+mod3+$n2 workspace number $term2
 bindcode mod1+mod3+$n3 workspace number $term3
-bindcode mod1+mod3+$n4 workspace number $term4
-bindcode mod1+mod3+$n5 workspace number $term5
+bindcode mod1+mod3+$n4 workspace number $misc1
+bindcode mod1+mod3+$n5 workspace number $misc2
 bindcode mod1+mod3+$n6 workspace number $code1
 bindcode mod1+mod3+$c workspace number $code1
 bindcode mod1+mod3+$n7 workspace number $code2
@@ -118,15 +119,15 @@ bindcode mod1+mod3+$comma workspace number $chrome2
 bindcode mod1+mod3+$dot workspace number $chrome3
 
 # start programs
-bindcode mod1+$t exec --no-startup-id gnome-terminal
+bindcode mod1+$t exec --no-startup-id "~/.bin/smart-open -c gnome-terminal -w '$term1,$term2,$term3,$misc1,$misc2'"
 bindcode mod1+$d exec --no-startup-id gnome-terminal --working-directory="$(cat /tmp/whereami)"
-bindcode mod1+$m exec --no-startup-id google-chrome-stable --profile-directory='Default'
-bindcode mod1+$comma exec --no-startup-id google-chrome-stable --profile-directory='Profile 1'
-bindcode mod1+$dot exec --no-startup-id google-chrome-stable --profile-directory='Profile 2'
-bindcode mod1+$j exec --no-startup-id google-chrome-stable --profile-directory='Profile 3'
-bindcode mod1+$n exec --no-startup-id gnome-terminal -e "zsh -c ranger"
-bindcode mod1+mod3+$x exec --no-startup-id "subl ~/.i3/config"
-bindcode mod1+$s exec --no-startup-id "subl"
+bindcode mod1+$m exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Default\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
+bindcode mod1+$comma exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 5\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
+bindcode mod1+$dot exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 2\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
+bindcode mod1+$j exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 3\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
+bindcode mod1+$n exec --no-startup-id EDITOR="tilde -b" gnome-terminal -e "zsh -c ~/.pyenv/shims/ranger"
+bindcode mod1+mod3+$x exec --no-startup-id "subl ~/.i3/config", workspace number $code1
+bindcode mod1+$s exec --no-startup-id subl; workspace number $code1
 bindcode mod1+mod3+$f exec --no-startup-id flameshot gui
 bindcode mod1+mod3+$d exec --no-startup-id deepin-screenshot
 bindcode mod1+$c kill
@@ -134,8 +135,9 @@ bindcode mod1+$p exec dmenu_run
 bindcode mod1+mod3+$g exec i3lock --color 2b3134
 bindcode mod1+mod3+$r exec --no-startup-id i3-msg reload && i3-msg restart
 bindcode mod1+mod3+$w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
-bindcode mod1+mod3+$q exec setxkbmap -layout us
-bindcode mod1+$q exec setxkbmap -layout de neo
+bindcode mod1+mod3+$q exec setxkbmap -layout us; exec notify-send --expire-time 1000 "Layout US"
+bindcode mod1+$q exec setxkbmap -layout de neo; exec notify-send --expire-time 1000 "Layout NEO"
+
 
 # change focus
 bindcode mod1+$i focus left
