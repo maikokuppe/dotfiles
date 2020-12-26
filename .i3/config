@@ -6,7 +6,7 @@ gaps outer 0
 new_window normal
 mouse_warping output
 
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 default_border pixel
 
 exec --no-startup-id dbus-launch compton --config ~/.config/compton/config &
@@ -125,7 +125,7 @@ bindcode mod1+$m exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stabl
 bindcode mod1+$comma exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 5\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
 bindcode mod1+$dot exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 2\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
 bindcode mod1+$j exec --no-startup-id "~/.bin/smart-open -c 'google-chrome-stable --profile-directory=\\"Profile 3\\"' -w '$chrome1,$chrome2,$chrome3,$misc1,$misc2'"
-bindcode mod1+$n exec --no-startup-id EDITOR="tilde -b" gnome-terminal -e "zsh -c ~/.pyenv/shims/ranger"
+bindcode mod1+$n exec --no-startup-id "~/.bin/smart-open -c \\"EDITOR='tilde -b' gnome-terminal -e 'zsh -c ~/.pyenv/shims/ranger'\\" -w '$misc1,$misc2'"
 bindcode mod1+mod3+$x exec --no-startup-id "subl ~/.i3/config", workspace number $code1
 bindcode mod1+$s exec --no-startup-id subl; workspace number $code1
 bindcode mod1+mod3+$f exec --no-startup-id flameshot gui
@@ -156,8 +156,7 @@ bindcode mod1+mod3+$u move window to workspace prev; workspace prev
 bindcode mod1+mod3+$o move window to workspace next; workspace next
 
 # window appearance
-bindcode mod1+$h split h
-bindcode mod1+$v split v
+bindcode mod1+$v split toggle
 bindcode mod1+$f fullscreen toggle
 bindcode mod1+$01 resize shrink width 40 px
 bindcode mod1+$02 resize grow width 40 px
@@ -180,5 +179,5 @@ bar {
   }
 }
 
-# focus workspace term1
-exec --no-startup-id i3-msg "workspace $term1"
+# focus workspace term0
+exec --no-startup-id i3-msg "workspace $term0"
