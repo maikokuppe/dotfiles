@@ -9,7 +9,7 @@ mouse_warping output
 for_window [class=".*"] border pixel 2
 default_border pixel
 
-client.focused #4c7899 #285577 #ffffff #2e9ef4 #50fa7b
+client.focused #4c7899 #285577 #ffffff #50fa7b #50fa7b
 
 exec --no-startup-id ~/.bin/polybar.sh &
 exec --no-startup-id dbus-launch compton --config ~/.config/compton/config &

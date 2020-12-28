@@ -4,7 +4,6 @@
 
 shadow = true;            # Enabled client-side shadows on windows.
 no-dock-shadow = false;    # Avoid drawing shadows on dock/panel windows.
-clear-shadow = true;      # Zero the part of the shadow's mask behind the window (experimental).
 shadow-radius = 8;        # The blur radius for shadows. (default 12)
 shadow-offset-x = -8;     # The left offset for shadows. (default -15)
 shadow-offset-y = -8;     # The top offset for shadows. (default -15)
