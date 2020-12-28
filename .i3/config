@@ -136,7 +136,7 @@ bindcode mod1+mod3+$d exec --no-startup-id deepin-screenshot
 bindcode mod1+$c kill
 bindcode mod1+$p exec dmenu_run
 bindcode mod1+mod3+$g exec i3lock --color 2b3134
-bindcode mod1+mod3+$r exec --no-startup-id i3-msg reload && i3-msg restart
+bindcode mod1+mod3+$r exec --no-startup-id i3-msg reload && i3-msg restart && pkill polybar && ~/.bin/polybar.sh
 bindcode mod1+mod3+$w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
 bindcode mod1+mod3+$q exec setxkbmap -layout us; exec notify-send --expire-time 1000 "Layout US"
 bindcode mod1+$q exec setxkbmap -layout de neo; exec notify-send --expire-time 1000 "Layout NEO"
