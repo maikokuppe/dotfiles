@@ -1,7 +1,7 @@
 font pango:monospace 10
 
 gaps inner 15
-gaps outer 0
+gaps outer 10
 
 new_window normal
 mouse_warping output
@@ -9,6 +9,9 @@ mouse_warping output
 for_window [class=".*"] border pixel 2
 default_border pixel
 
+client.focused #4c7899 #285577 #ffffff #2e9ef4 #50fa7b
+
+exec --no-startup-id ~/.bin/polybar.sh &
 exec --no-startup-id dbus-launch compton --config ~/.config/compton/config &
 exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
 
@@ -165,19 +168,6 @@ bindcode mod1+$q2 resize grow height 40 px
 
 # assign windows
 for_window [class="Sublime"] move container to workspace $code1; workspace $code1
-
-bar {
-  strip_workspace_numbers yes
-  status_command i3status
-  tray_output none
-  i3bar_command i3bar --transparency
-  position top
-  separator_symbol " | "
-  font pango:monospace, FontAwesome 12
-  colors {
-    background #000000c0
-  }
-}
 
 # focus workspace term0
 exec --no-startup-id i3-msg "workspace $term0"
