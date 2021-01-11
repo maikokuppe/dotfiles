@@ -8,6 +8,9 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Disable shell built-in command `r`
+disable r
+
 source ~/.env
 source ~/.env_secrets
 source ~/.antigenrc
