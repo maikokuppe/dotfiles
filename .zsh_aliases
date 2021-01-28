@@ -22,6 +22,7 @@ alias gb='git branch --sort=-committerdate | head'
 alias s='subl'
 alias sn='subl -n'
 alias t='tilde -b'
+alias hl="$(yarn global bin)/highlight"
 alias sss='shutdown now'
 
 alias ssh-lea-staging='ssh lea-dev.instaffo.com'
