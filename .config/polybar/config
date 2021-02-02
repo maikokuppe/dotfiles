@@ -1,0 +1,207 @@
+[colors]
+transparency = #0000000
+background = ${xrdb:background}
+foreground = ${xrdb:foreground}
+foreground-alt = ${xrdb:color8}
+
+red = ${xrdb:color1}
+green = ${xrdb:color2}
+yellow = ${xrdb:color3}
+purple= ${xrdb:color4}
+cyan = ${xrdb:color6}
+
+[bar/bar]
+font-0 = "pango:style=Regular:pixelsize=13;2"
+font-1 = "Font Awesome:style=Regular:pixelsize=16;3"
+font-2 = "Font Awesome:style=Solid:pixelsize=16;3"
+
+monitor = ${env:MONITOR:eDP-1}
+
+fixed-center = true
+width = 100%
+height = 30
+
+background = ${colors.transparency}
+foreground = ${colors.foreground}
+border-top-color = ${colors.transparency}
+
+padding-left = 0
+padding-right = 0
+border-left-size = 25
+border-right-size = 25
+border-bottom-size = 0
+border-top-size = 25
+
+modules-left = i3
+modules-center =
+modules-right = openweathermap-simple load cpu space memory wifi ethernet battery date
+
+[module/i3]
+type = internal/i3
+index-sort = true
+pin-workspaces = false
+enable-scroll = true
+wrapping-scroll = true
+strip-wsnumbers = true
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-margin = 1
+label-mode-background = ${colors.yellow}
+label-mode-foreground = ${colors.background}
+
+label-focused = %name%
+label-focused-padding = 2
+label-focused-background = ${colors.green}
+label-focused-foreground = ${colors.background}
+
+label-unfocused =  %name%
+label-unfocused-padding= 2
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+
+label-urgent = %name%
+label-urgent-padding= 2
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.background}
+
+label-visible = %name%
+label-visible-padding= 2
+label-visible-background = ${colors.purple}
+label-visible-foreground = ${colors.background}
+
+[module/openweathermap-simple]
+type = custom/script
+exec = eval $(cat ~/.env_secrets); ~/.bin/openweathermap-simple
+interval = 1800
+label-font = 3
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+label-padding = 2
+label-margin = 0
+
+[module/load]
+type = custom/script
+exec = "awk '{print " "$1}' < /proc/loadavg"
+interval = 2.5
+label-font = 3
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+label-padding = 2
+label-margin = 0
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = <label>
+label =  %percentage:02%%
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+label-padding = 2
+label-margin = 0
+
+[module/space]
+type = custom/script
+exec = df -h / | tail -1 | awk '{print " "$5}'
+interval = 5
+label-font = 3
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+label-padding = 2
+label-margin = 0
+
+[module/memory]
+type = internal/memory
+interval = 2.5
+format = <label>
+label = " %percentage_used%%"
+label-padding = 2
+label-margin = 0
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+
+[module/wifi]
+type = internal/network
+interface = wlp5s0
+interval = 2.5
+
+format-connected = <label-connected>
+label-connected = " %essid%"
+label-connected-padding = 2
+label-connected-margin = 0
+label-connected-background = ${colors.background}
+label-connected-foreground = ${colors.foreground}
+
+format-disconnected = <label-disconnected>
+label-disconnected = " None"
+label-disconnected-padding = 2
+label-disconnected-margin = 0
+label-disconnected-background = ${colors.background}
+label-disconnected-foreground = #44ffffff
+
+[module/ethernet]
+type = internal/network
+interface = enp4s0
+interval = 2.5
+
+format-connected = <label-connected>
+label-connected = " %linkspeed%"
+label-connected-padding = 2
+label-connected-margin = 0
+label-connected-background = ${colors.background}
+label-connected-foreground = ${colors.foreground}
+
+format-disconnected = <label-disconnected>
+label-disconnected = " None"
+label-disconnected-padding = 2
+label-disconnected-margin = 0
+label-disconnected-background = ${colors.background}
+label-disconnected-foreground = #44ffffff
+
+[module/battery]
+type = internal/battery
+full-at = 90
+
+format-charging = <label-charging>
+label-charging = " %percentage%%"
+format-charging-background = ${colors.background}
+format-charging-foreground = ${colors.foreground}
+format-charging-padding = 2
+format-charging-margin = 1
+
+format-full = <label-full>
+label-full = " %percentage%%"
+format-full-background = ${colors.background}
+format-full-foreground = ${colors.foreground}
+format-full-padding = 2
+format-full-margin = 0
+
+format-discharging = <label-discharging>
+label-discharging = " %percentage%%"
+format-discharging-background = ${colors.background}
+format-discharging-foreground = ${colors.foreground}
+format-discharging-padding = 2
+format-discharging-margin= 0
+
+[module/date]
+type = internal/date
+label = " %date% %time%  "
+date = %d. %B
+time = %H:%M:%S
+interval = 1
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+label-padding = 2
+label-margin = 0
+
+[module/title]
+type = internal/xwindow
+format-foreground = ${colors.foreground}
+format-padding = 1
+label-maxlen = 100
+label-padding = 2
+label-margin = 1
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
