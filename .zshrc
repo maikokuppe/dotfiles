@@ -21,7 +21,7 @@ chpwd() { pwd > /tmp/whereami }
 
 # Misc
 ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
-eval "$(pyenv init -)"
+eval "$(pyenv init -)" > /dev/null
 eval "$(rbenv init -)"
 
 # >>> conda initialize >>>
