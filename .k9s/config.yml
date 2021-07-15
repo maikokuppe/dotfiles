@@ -1,0 +1,107 @@
+k9s:
+  refreshRate: 2
+  maxConnRetry: 5
+  enableMouse: false
+  headless: false
+  logoless: false
+  crumbsless: false
+  readOnly: false
+  noIcons: false
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: 60
+    fullScreenLogs: false
+    textWrap: false
+    showTime: false
+  currentContext: do-fra1-backbone
+  currentCluster: do-fra1-backbone
+  clusters:
+    do-fra1-backbone:
+      namespace:
+        active: production
+        favorites:
+        - production
+        - all
+        - staging
+        - default
+      view:
+        active: p production
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    do-fra1-data-staging:
+      namespace:
+        active: prometheus
+        favorites:
+        - linkerd
+        - all
+        - prometheus
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    do-fra1-internal-staging:
+      namespace:
+        active: prometheus
+        favorites:
+        - all
+        - prometheus
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    do-fra1-platform:
+      namespace:
+        active: review
+        favorites:
+        - review
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+  thresholds:
+    cpu:
+      critical: 99
+      warn: 90
+    memory:
+      critical: 99
+      warn: 90

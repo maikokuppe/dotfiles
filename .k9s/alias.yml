@@ -1,0 +1,6 @@
+alias:
+  p: v1/pods
+  d: apps/v1/deployments
+  s: v1/services
+  i: networking.k8s.io/v1beta1/ingresses
+  c: batch/v1beta1/cronjobs
