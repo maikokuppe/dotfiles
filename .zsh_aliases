@@ -27,8 +27,6 @@ alias sss='shutdown now'
 
 alias ssh-lea-staging='ssh lea-dev.instaffo.com'
 alias ssh-lea-prod='ssh lea.instaffo.com'
-alias ssh-fame-staging='kubectl exec -n staging --stdin --tty fame-api-949988c98-75jnz -- /bin/bash'
-alias ssh-fame-production='kubectl exec -n production --stdin --tty fame-api-58b9f7cfcd-t4tz7 -- /bin/bash'
 alias ssh-suite-staging='ssh app.instaffostaging.com'
 alias ssh-suite-production='ssh rails-01-fra.instaffo.de'
 alias ssh-suite-staging-salesforce='ssh suite-staging-salesforce.instaffo.de'
