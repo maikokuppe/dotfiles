@@ -125,10 +125,11 @@ label-background = ${colors.background}
 [module/wifi]
 type = internal/network
 interface = wlp5s0
-interval = 2.5
+interval = 5
+udspeed-minwidth = 5
 
 format-connected = <label-connected>
-label-connected = " %essid%"
+label-connected = " %essid% %downspeed%↓ %upspeed%↑"
 label-connected-padding = 2
 label-connected-margin = 0
 label-connected-background = ${colors.background}
@@ -188,7 +189,7 @@ format-discharging-margin= 0
 [module/date]
 type = internal/date
 label = " %date% %time%  "
-date = %d. %B
+date = %d. %b
 time = %H:%M:%S
 interval = 1
 label-background = ${colors.background}

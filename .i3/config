@@ -79,30 +79,30 @@ exec_always --no-startup-id xset dpms 0 0 0
 workspace_layout default
 
 # workspace names
-set $term0 0:⁰
-set $term1 1:¹
-set $term2 2:²
-set $term3 3:³
-set $misc1 4:¹
-set $misc2 5:²
-set $code1 6:¹
-set $code2 7:²
+set $misc1 0:¹
+set $misc2 1:²
+set $code1 2:¹
+set $code2 3:²
+set $term0 4:⁰
+set $term1 5:¹
+set $term2 6:²
+set $term3 7:³
 set $chrome1 8:¹
 set $chrome2 9:²
 set $chrome3 10:³
 
 # align workspaces
-workspace 0 output eDP-1
-workspace 1 output eDP-1
-workspace 2 output eDP-1
-workspace 3 output eDP-1
-workspace 4 output HDMI-1
-workspace 5 output HDMI-1
-workspace 6 output HDMI-1
-workspace 7 output HDMI-1
-workspace 8 output DP-1
-workspace 9 output DP-1
-workspace 10 output DP-1
+workspace 0 output DP-1
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+workspace 6 output eDP-1
+workspace 7 output eDP-1
+workspace 8 output HDMI-1
+workspace 9 output HDMI-1
+workspace 10 output HDMI-1
 
 # switch to workspace
 bindcode mod1+mod3+$hat workspace number $term0
@@ -140,7 +140,6 @@ bindcode mod1+mod3+$r exec --no-startup-id i3-msg reload && i3-msg restart && pk
 bindcode mod1+mod3+$w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers
 bindcode mod1+mod3+$q exec setxkbmap -layout us; exec notify-send --expire-time 1000 "Layout US"
 bindcode mod1+$q exec setxkbmap -layout de neo; exec notify-send --expire-time 1000 "Layout NEO"
-
 
 # change focus
 bindcode mod1+$i focus left
