@@ -142,25 +142,6 @@ label-disconnected-margin = 0
 label-disconnected-background = ${colors.background}
 label-disconnected-foreground = #44ffffff
 
-[module/ethernet]
-type = internal/network
-interface = enp4s0
-interval = 2.5
-
-format-connected = <label-connected>
-label-connected = " %linkspeed%"
-label-connected-padding = 2
-label-connected-margin = 0
-label-connected-background = ${colors.background}
-label-connected-foreground = ${colors.foreground}
-
-format-disconnected = <label-disconnected>
-label-disconnected = " None"
-label-disconnected-padding = 2
-label-disconnected-margin = 0
-label-disconnected-background = ${colors.background}
-label-disconnected-foreground = #44ffffff
-
 [module/battery]
 type = internal/battery
 full-at = 90

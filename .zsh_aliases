@@ -1,23 +1,24 @@
 #!/bin/zsh
 
-alias pw='pwgen -n 8 -s | cut -f1 | xclip -selection c'
-alias pwlong='pwgen -n 32 -s | cut -f1 | xclip -selection c'
+alias pw='pwgen -n 8 -s | cut -f1'
+alias pwlong='pwgen -n 32 -s | cut -f1'
 alias szsh='source ~/.zshrc > /dev/null 2>&1; zsh'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ll='ls -alF'
 alias bg='feh --bg-scale --randomize ~/Pictures/wallpapers'
 alias rs="bin/rspec"
 alias r="rails"
-alias prometheus='kubectl port-forward -n prometheus-operator svc/prometheus-operator-grafana 3100:80'
 
 alias gst='git status'
 alias gd='git diff'
 alias ga='git add .'
 alias gam='git commit --amend --no-edit'
 alias gc='git commit -m'
+alias gch='git checkout'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit"
-alias gpr="git pull origin master --rebase"
+alias gpr="git fetch; git rebase origin/master"
 alias gf='git fetch'
+alias gp='git pull'
 alias gb='git branch --sort=-committerdate | head'
 alias s='subl'
 alias sn='subl -n'
